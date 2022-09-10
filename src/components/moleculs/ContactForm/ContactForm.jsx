@@ -1,33 +1,14 @@
 import React, {useState} from "react";
 import { NameInputTitle,ContactFormWrapper,ContactFormButton, Input } from "./ContactForm.styled"; 
 import PropTypes from "prop-types"
-
+import initialState from "./initialState"
+import useForm from "hooks/useForm";
+ 
 
 export default function ContactForm({onSubmit}) {
-  const [name,setName] = useState('')
-  const [number,setNumber] = useState('')
+  const {state, handleChange, handleSubmit} = useForm({initialState, onSubmit})
 
-  const handleInputChangeName = (event) => {
-            const target = event.target;
-            const value = target.value;
-            setName(value)
-             
-          }
-  const handleInputChangeNumber = (event) => {
-    const target = event.target;
-    const value = target.value;
-    setNumber(value)
-    
-      
-}
-
-    const  handleSubmit = (event) =>  {
-          event.preventDefault();
-          console.log(name, number)
-          onSubmit( name , number)
-          setName('')
-          setNumber('')
-        }
+  const {name, number} = state;
   
   return (
     <div>
@@ -36,7 +17,7 @@ export default function ContactForm({onSubmit}) {
                 Name:
                 </NameInputTitle>
                 <Input
-                        onChange={handleInputChangeName}
+                        onChange={handleChange}
                         value={name}
                         type="text"
                         name="name"
@@ -51,7 +32,7 @@ export default function ContactForm({onSubmit}) {
                 Number:
                 </NameInputTitle>
                 <Input
-                      onChange={handleInputChangeNumber}
+                      onChange={handleChange}
                       value={number}
                       type="tel"
                       name="number"
@@ -67,10 +48,10 @@ export default function ContactForm({onSubmit}) {
   )
 } 
 
-  ContactForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+  // ContactForm.propTypes = {
+  //   onSubmit: PropTypes.func.isRequired,
     
-  };
+  // };
 
 
 

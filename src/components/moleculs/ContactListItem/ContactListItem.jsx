@@ -12,7 +12,7 @@ export const ContactListItem = ({name,number, onClick }) => {
 
 export default ContactListItem
 
-ContactListItem.propTypes = {
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-}
+// ContactListItem.propTypes = {
+//     name: PropTypes.string.isRequired,
+//     number: PropTypes.string.isRequired,
+// }

@@ -1,87 +1,30 @@
 import React from "react";
 import ContactForm from "./moleculs/ContactForm/ContactForm";
 import ContactList from "./moleculs/ContactList/ContactList";
-import { nanoid } from 'nanoid'
 import styled from "styled-components";
 import Filter from "./moleculs/Filter/Filter";
-import Notiflix from 'notiflix';
-import { useState, useEffect } from "react";
-
+import { useDispatch } from "react-redux"; 
+import { useSelector } from "react-redux";
+import { addContact } from "redux/actions";
+import initialStore from "../redux/store"
 
 export default function App() {
-  const [contacts, setContacts] = useState(
-    [
-      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-      {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-    ]
-  )
-
-  const [filter, setFilter] = useState('')
-
-  const addContact = (name, number) => {
-    
-    const newContact = {
-      id: "",
-      name: "",
-      number: 0 
-    }
-   
-    newContact.name = name
-    newContact.number = number
-    newContact.id = nanoid() 
-    
-    const existedContact =  contacts.find(contact => contact.name === newContact.name)
-    
-    if(existedContact){
-      Notiflix.Report.warning('Notification', `${newContact.name } is already in contacts`, 'Return');
-      return
-    }
-     
-    setContacts([...contacts, newContact])
-    // console.log(contacts)
+  const contacts = useSelector(store => store.contacts)
+  console.log(contacts)
+  const dispatch = useDispatch()
+  const onAddContact = (payload) => {
+    const action = addContact(payload)
+    dispatch(action)
   }
-
-   const changeFilter = (e) => {
-    setFilter(e.currentTarget.value)  
-  }
-
-   const deleteContact = (contactId) => {
-    setContacts(contacts.filter(contact => contact.id !== contactId)) 
-   
-  }
- 
-  useEffect(() => {
-   
-    const storedContacts = localStorage.getItem('contacts')
-    const parsedContacts = JSON.parse(storedContacts)
-    if(parsedContacts){
-      setContacts(parsedContacts ) 
-     }
-    
-     console.log('parsedContacts', parsedContacts)
-}, [])
-
-
-  
-  useEffect(() => {
-       localStorage.setItem('contacts', JSON.stringify(contacts))
-    },[contacts])
-
-
-
-  const filteredContacts =  contacts.filter(
-            contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
     
   return (
     <div>
       <ContactCard>
           <h1>Phonebook</h1>
-          <ContactForm onSubmit={addContact}/>
+          <ContactForm  onSubmit={onAddContact}/>
           <h2>Contacts</h2>
-          <Filter value={filter} onChange={changeFilter}/>
-          <ContactList contacts={filteredContacts} onDeleteContact={deleteContact}/>
+          <Filter    />
+          <ContactList contacts={contacts}/>
       </ContactCard> 
     </div>
   )
