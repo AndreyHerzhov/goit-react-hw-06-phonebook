@@ -5,16 +5,22 @@ import styled from "styled-components";
 import Filter from "./moleculs/Filter/Filter";
 import { useDispatch } from "react-redux"; 
 import { useSelector } from "react-redux";
-import { addContact } from "redux/actions";
-import initialStore from "../redux/store"
+import { addContact, removeContact } from "redux/actions";
+  
 
 export default function App() {
   const contacts = useSelector(store => store.contacts)
   console.log(contacts)
   const dispatch = useDispatch()
+
   const onAddContact = (payload) => {
     const action = addContact(payload)
     dispatch(action)
+  }
+
+  const onRemoveContact = (payload) => {
+    dispatch(removeContact(payload))
+    
   }
     
   return (
@@ -24,7 +30,7 @@ export default function App() {
           <ContactForm  onSubmit={onAddContact}/>
           <h2>Contacts</h2>
           <Filter    />
-          <ContactList contacts={contacts}/>
+          <ContactList contacts={contacts}  onDeleteContact={onRemoveContact}/>
       </ContactCard> 
     </div>
   )

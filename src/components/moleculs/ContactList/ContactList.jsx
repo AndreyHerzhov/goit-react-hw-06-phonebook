@@ -5,13 +5,18 @@ import PropTypes from "prop-types"
 export const  ContactList = ({contacts, onDeleteContact}) => {
   const elements = contacts.map(({id, name, number}) => {
     return (
-      <ContactListItem  key={id} name={name} number={number} onClick={() => onDeleteContact(id)}/>
+      <li key={id}
+       >{name}. Автор: {number}.
+      <button type="button" 
+          onClick={() => onDeleteContact(id)}>Удалить</button>
+  </li>
   )
 })
         return (
             <ContactListWrapper>
             <List>
-                {elements}</List>
+                {elements}
+            </List>
             </ContactListWrapper>
         )
 }
