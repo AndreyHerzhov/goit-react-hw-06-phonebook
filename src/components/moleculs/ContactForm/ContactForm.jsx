@@ -12,7 +12,7 @@ export default function ContactForm({onSubmit}) {
   
   return (
     <div>
- <ContactFormWrapper onSubmit={handleSubmit}>
+  <ContactFormWrapper onSubmit={handleSubmit}>
                 <NameInputTitle>
                 Name:
                 </NameInputTitle>

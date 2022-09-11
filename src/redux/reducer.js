@@ -11,6 +11,7 @@ const reducer = (store = initialStore, {type, payload}) => {
             return {...store, contacts: [...store.contacts, payload]};
         case REMOVE_CONTACT:
             const newContacts = store.contacts.filter(({id}) => id !== payload);
+            console.log(newContacts)
             return {...store, books: newContacts};
         case SET_FILTER:
             return {...store, filter: payload};
