@@ -1,7 +1,8 @@
-export const getContacts = store => store.contacts;
-
-
-export const getFilteredContacts = ({contacts, filter}) => {
+export const getFilteredContacts = (store) => {
+    const a = JSON.stringify(store.contacts)
+    const b = JSON.parse(a)
+    const contacts = b.contacts.items
+    const filter = b.contacts.filter
     if(!filter){
         return contacts;
     }

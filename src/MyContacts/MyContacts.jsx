@@ -1,31 +1,33 @@
 import { useSelector, useDispatch } from "react-redux";
 import FormAddContact from "./FormAddContact";
 import ContactList from "./ContactList";
-import { addContact, removeContact} from "redux/contacts/contacts-slice";
-import { setFilter } from "redux/filter/filter-slice";
+import { addContact,  removeContact, filterContacts} from "redux/contacts/contacts-actions";
 import styled from "styled-components";
-import { getFilteredContacts } from "../redux/contacts/contacts-selectors"
 import Filter from "./Filter/Filter";
+import { getFilteredContacts } from "redux/contacts/contacts-selectors";
+ 
 
 const MyContacts = () => {
     const contacts = useSelector(getFilteredContacts)
-    const filter = useSelector(store  => store.filter);
-    
+    const filter = useSelector(store  => store.contacts.contacts.filter);
     const dispatch = useDispatch()
+    const filteredContacts = useSelector(getFilteredContacts)  
+    console.log(filteredContacts)  
     const onAddContact = (payload) => {
         const  action = addContact(payload)
         dispatch(action)
-      
+         
     }
-    
     const onRemoveContact = (payload) => {
         dispatch(removeContact(payload));
+         
     }
 
    const onSetFilter = ({target}) => {
-        dispatch(setFilter(target.value))
+     dispatch(filterContacts(target.value))
+         
    }
-
+ 
  
     return (
         <div>

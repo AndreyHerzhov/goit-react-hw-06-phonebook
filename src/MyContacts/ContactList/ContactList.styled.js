@@ -61,7 +61,8 @@ export const ContactListCard = styled.div`
     flex-direction: column;
     padding: 20px;
     width: 400px;
-    height: 220px;
+    height: 300px;
+    overflow-y: scroll;
     border: 1px solid grey;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 20px;

@@ -1,9 +1,8 @@
 import { initialState } from "./initialState";
 import useForm from "shared/hooks/useForm";
-import PropTypes from "prop-types"
 import { Form, GroupWrapper, Label, Input, Button, ContactCard } from "./FormAddContact.styled";
 
-const FormAddContact = ({onSubmit}) => {
+const FormAddBook = ({onSubmit}) => {
     const {state, handleChange, handleSubmit} = useForm({initialState, onSubmit})
 
     const {name, number} = state;
@@ -37,10 +36,4 @@ const FormAddContact = ({onSubmit}) => {
 
 }
 
-export default FormAddContact;
-
-
-FormAddContact.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    
-  };
+export default FormAddBook;
