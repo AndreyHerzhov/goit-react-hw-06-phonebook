@@ -58,6 +58,7 @@ export const DeleteButton = styled.button`
 
 export const ContactListCard = styled.div`
    display: flex;
+   overflow-y: scroll;
     flex-direction: column;
     padding: 20px;
     width: 400px;
